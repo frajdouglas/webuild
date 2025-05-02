@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link"
 import { CalendarDays, ChevronRight, Instagram } from "lucide-react"
 
@@ -5,8 +7,23 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { BookingForm } from "@/components/booking-form"
 import { ResourceCard } from "@/components/resource-card"
+import { getCalendar } from "@/services/getCalendar";
+import { useEffect } from "react";
 
 export default function Home() {
+
+  useEffect(() => {
+    const fetchCalendarData = async () => {
+      try {
+        const data = await getCalendar();
+        console.log("Calendar data:", data);
+      } catch (error) {
+        console.error("Error fetching calendar data:", error);
+      }
+    };
+
+    fetchCalendarData();
+  }, []);
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
