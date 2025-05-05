@@ -8,15 +8,18 @@ import { Calendar } from "@/components/ui/calendar"
 import { BookingForm } from "@/components/booking-form"
 import { ResourceCard } from "@/components/resource-card"
 import { getCalendar } from "@/services/getCalendar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [availableDates, setAvailableDates] = useState<Date[]>([]);
 
   useEffect(() => {
     const fetchCalendarData = async () => {
       try {
         const data = await getCalendar();
-        console.log("Calendar data:", data);
+        // Extract the start dates from the response
+        const dates = data.map((item: { start: { dateTime: string } }) => new Date(item.start.dateTime));
+        setAvailableDates(dates);
       } catch (error) {
         console.error("Error fetching calendar data:", error);
       }
@@ -24,6 +27,7 @@ export default function Home() {
 
     fetchCalendarData();
   }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -156,7 +160,7 @@ export default function Home() {
                     <h3 className="text-xl font-bold">Select a Date</h3>
                   </div>
                   <div className="mt-4">
-                    <Calendar mode="single" className="rounded-md border" />
+                    <Calendar availableDates={availableDates} mode="single" className="rounded-md border" />
                   </div>
                 </div>
               </div>
