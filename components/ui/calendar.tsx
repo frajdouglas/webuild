@@ -9,19 +9,20 @@ import { buttonVariants } from "@/components/ui/button";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   availableDates?: Date[];
-  onSelect?: (date: Date | null) => void; // Add onSelect prop
+  onSelect?: (date: Date | null) => void;
 };
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  availableDates = [], // Default to an empty array
+  availableDates = [],
   onSelect,
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
+      mode="single" // Explicitly set the mode to "single"
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
@@ -51,11 +52,10 @@ function Calendar({
       disabled={(date) =>
         !availableDates.some(
           (availableDate) =>
-            availableDate.toDateString() === date.toDateString()
+            availableDate.toDateString() === date?.toDateString()
         )
-      } // Disable dates not in availableDates
-      onSelect={onSelect} // Call onSelect when a date is selected
-
+      }
+      onSelect={(day) => onSelect?.(day || null)} // Handle undefined by converting it to null
       components={{
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,

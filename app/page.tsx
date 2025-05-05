@@ -162,8 +162,12 @@ export default function Home() {
                     <h3 className="text-xl font-bold">Select a Date</h3>
                   </div>
                   <div className="mt-4">
-                    <Calendar onSelect={setSelectedDate} // Pass the callback to update selectedDate
-                      availableDates={availableDates} mode="single" className="rounded-md border" />
+                    <Calendar
+                      onSelect={(date) => setSelectedDate(date || null)} // Handle undefined by converting it to null
+                      availableDates={availableDates}
+                      mode="single"
+                      className="rounded-md border"
+                    />
                   </div>
                 </div>
               </div>
