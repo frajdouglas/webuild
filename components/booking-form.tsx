@@ -98,31 +98,24 @@ const handleSubmit = (e: React.FormEvent) => {
         </div>
         <div className="space-y-2">
           <Label>Select a Time Slot</Label>
-          <RadioGroup value={timeSlot} onValueChange={setTimeSlot} className="flex flex-col space-y-1" required>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="9:00 AM" id="time-1" />
-              <Label htmlFor="time-1" className="font-normal">
-                9:00 AM
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="11:00 AM" id="time-2" />
-              <Label htmlFor="time-2" className="font-normal">
-                11:00 AM
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="2:00 PM" id="time-3" />
-              <Label htmlFor="time-3" className="font-normal">
-                2:00 PM
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="4:00 PM" id="time-4" />
-              <Label htmlFor="time-4" className="font-normal">
-                4:00 PM
-              </Label>
-            </div>
+          <RadioGroup
+            value={timeSlot}
+            onValueChange={setTimeSlot}
+            className="flex flex-col space-y-1"
+            required
+          >
+            {availableTimes.length > 0 ? (
+              availableTimes.map((time) => (
+                <div key={time} className="flex items-center space-x-2">
+                  <RadioGroupItem value={time} id={`time-${time}`} />
+                  <Label htmlFor={`time-${time}`} className="font-normal">
+                    {time}
+                  </Label>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">No available time slots for the selected date.</p>
+            )}
           </RadioGroup>
         </div>
         <div className="space-y-2">
