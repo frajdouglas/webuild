@@ -21,36 +21,24 @@ export function BookingForm({ availableDates, selectedDate }: BookingFormProps) 
   const [email, setEmail] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
   const [notes, setNotes] = useState("")
-console.log(selectedDate)
-console.log(availableDates)
 
-let selectedDates: string[] | null = []
-if (selectedDate && availableDates) {
-  selectedDates = availableDates
-    .filter((item) => {
-      console.log( item)
+  let selectedDates: Date[] | null = []
+  if (selectedDate && availableDates) {
+    selectedDates = availableDates
+      .filter((item) => {
+        return (
+          item.getDate() === selectedDate.getDate() &&
+          item.getMonth() === selectedDate.getMonth() &&
+          item.getFullYear() === selectedDate.getFullYear()
+        );
+      })
+  }
 
-      const convertedDate = new Date(item); // Convert the string to a Date object
-      console.log(convertedDate, selectedDate)
-      console.log(convertedDate.getDate(), selectedDate.getDate())
+  let availableTimes = selectedDates.map((date) => {
+    return date.toLocaleTimeString()
+  })
 
-      return (
-        convertedDate.getDate() === selectedDate.getDate() &&
-        convertedDate.getMonth() === selectedDate.getMonth() &&
-        convertedDate.getFullYear() === selectedDate.getFullYear()
-      );
-    })
-    // .flatMap((item) => item.times); // Extract the times for the matching date
-}
-
-console.log(selectedDates[0])
-let availableTimes = selectedDates.map((date) => {
-  let convertedDate = new Date(date);
-  return convertedDate.toLocaleTimeString()
-})
-
-console.log(availableTimes)
-const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     // In a real app, this would connect to a backend service
