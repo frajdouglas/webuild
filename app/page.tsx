@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   useEffect(() => {
     const fetchCalendarData = async () => {
@@ -19,6 +20,7 @@ export default function Home() {
         const data = await getCalendar();
         // Extract the start dates from the response
         const dates = data.map((item: { start: { dateTime: string } }) => new Date(item.start.dateTime));
+        console.log("Available dates:", dates);
         setAvailableDates(dates);
       } catch (error) {
         console.error("Error fetching calendar data:", error);
@@ -160,11 +162,12 @@ export default function Home() {
                     <h3 className="text-xl font-bold">Select a Date</h3>
                   </div>
                   <div className="mt-4">
-                    <Calendar availableDates={availableDates} mode="single" className="rounded-md border" />
+                    <Calendar onSelect={setSelectedDate} // Pass the callback to update selectedDate
+                      availableDates={availableDates} mode="single" className="rounded-md border" />
                   </div>
                 </div>
               </div>
-              <BookingForm />
+              <BookingForm selectedDate={selectedDate} availableDates={availableDates} />
             </div>
           </div>
         </section>

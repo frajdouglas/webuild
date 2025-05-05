@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  availableDates?: Date[]; // Add availableDates prop
+  availableDates?: Date[];
+  onSelect?: (date: Date | null) => void; // Add onSelect prop
 };
 
 function Calendar({
@@ -16,6 +17,7 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   availableDates = [], // Default to an empty array
+  onSelect,
   ...props
 }: CalendarProps) {
   return (
@@ -52,6 +54,8 @@ function Calendar({
             availableDate.toDateString() === date.toDateString()
         )
       } // Disable dates not in availableDates
+      onSelect={onSelect} // Call onSelect when a date is selected
+
       components={{
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,

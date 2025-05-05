@@ -12,13 +12,45 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 
-export function BookingForm() {
+type BookingFormProps = {
+  availableDates: Date[];
+  selectedDate: Date | null;
+};
+export function BookingForm({ availableDates, selectedDate }: BookingFormProps) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
   const [notes, setNotes] = useState("")
+console.log(selectedDate)
+console.log(availableDates)
 
-  const handleSubmit = (e: React.FormEvent) => {
+let selectedDates: string[] | null = []
+if (selectedDate && availableDates) {
+  selectedDates = availableDates
+    .filter((item) => {
+      console.log( item)
+
+      const convertedDate = new Date(item); // Convert the string to a Date object
+      console.log(convertedDate, selectedDate)
+      console.log(convertedDate.getDate(), selectedDate.getDate())
+
+      return (
+        convertedDate.getDate() === selectedDate.getDate() &&
+        convertedDate.getMonth() === selectedDate.getMonth() &&
+        convertedDate.getFullYear() === selectedDate.getFullYear()
+      );
+    })
+    // .flatMap((item) => item.times); // Extract the times for the matching date
+}
+
+console.log(selectedDates[0])
+let availableTimes = selectedDates.map((date) => {
+  let convertedDate = new Date(date);
+  return convertedDate.toLocaleTimeString()
+})
+
+console.log(availableTimes)
+const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     // In a real app, this would connect to a backend service
