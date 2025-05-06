@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  // const [selectedDate, setSelectedDate] = useState();
 
   useEffect(() => {
     const fetchCalendarData = async () => {
@@ -163,8 +164,9 @@ export default function Home() {
                   </div>
                   <div className="mt-4">
                     <Calendar
-                      onSelect={(date) => setSelectedDate(date || null)} // Handle undefined by converting it to null
+                      // onSelect={(date) => setSelectedDate(date || null)} // Handle undefined by converting it to null
                       availableDates={availableDates}
+                      setSelectedDate={setSelectedDate}
                       mode="single"
                       className="rounded-md border"
                     />

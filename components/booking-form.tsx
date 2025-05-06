@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
+import { useMemo, useState } from "react"
 
-import { useState } from "react"
 import { Clock } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -22,21 +22,22 @@ export function BookingForm({ availableDates, selectedDate }: BookingFormProps) 
   const [timeSlot, setTimeSlot] = useState("")
   const [notes, setNotes] = useState("")
 
-  let selectedDates: Date[] | null = []
-  if (selectedDate && availableDates) {
-    selectedDates = availableDates
-      .filter((item) => {
-        return (
-          item.getDate() === selectedDate.getDate() &&
-          item.getMonth() === selectedDate.getMonth() &&
-          item.getFullYear() === selectedDate.getFullYear()
-        );
-      })
-  }
+  // Memoize the filtered dates and available times
+  const availableTimes = useMemo(() => {
+    if (!selectedDate) return [];
 
-  let availableTimes = selectedDates.map((date) => {
-    return date.toLocaleTimeString()
-  })
+    // Filter availableDates to find matching dates
+    const selectedDates = availableDates.filter((item) => {
+      return (
+        item.getDate() === selectedDate.getDate() &&
+        item.getMonth() === selectedDate.getMonth() &&
+        item.getFullYear() === selectedDate.getFullYear()
+      );
+    });
+
+    // Map the selected dates to their time strings
+    return selectedDates.map((date) => date.toLocaleTimeString());
+  }, [availableDates, selectedDate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
