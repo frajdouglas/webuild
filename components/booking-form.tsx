@@ -192,7 +192,11 @@ return (
           {availableTimes.length > 0 ? (
             availableTimes.map((time) => (
               <div key={time} className="flex items-center space-x-2">
-                <RadioGroupItem value={time} id={`time-${time}`} />
+                <RadioGroupItem
+                  value={time}
+                  id={`time-${time}`}
+                  className="h-5 w-5 rounded-full border border-gray-300 focus:ring-2 focus:ring-pink-500 flex-shrink-0"
+                />
                 <Label htmlFor={`time-${time}`} className="font-normal">
                   {time}
                 </Label>
