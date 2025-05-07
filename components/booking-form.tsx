@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Clock, Loader2, CheckCircle } from "lucide-react"; // Import CheckCircle for success icon
-
+import DOMPurify from "dompurify";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -75,6 +75,10 @@ export function BookingForm({ availableDates, selectedDate }: BookingFormProps) 
 
     setLoading(true); // Set loading to true while waiting for the API response
 
+    const sanitizedName = DOMPurify.sanitize(name);
+    const sanitizedEmail = DOMPurify.sanitize(email);
+    const sanitizedTimeSlot = DOMPurify.sanitize(timeSlot);
+    const sanitizedNotes = DOMPurify.sanitize(notes);  
     // Mock API call
     setTimeout(() => {
       setLoading(false); // Set loading to false after the response
