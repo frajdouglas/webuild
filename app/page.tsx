@@ -55,13 +55,13 @@ export default function Home() {
           </div>
           <div className="ml-auto flex items-center space-x-4">
             <Link
-              href="https://instagram.com/webuild"
+              href="https://www.instagram.com/mariakh_n/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-1 text-pink-500 hover:text-pink-600 transition-colors"
             >
               <Instagram className="h-5 w-5" />
-              <span className="hidden sm:inline-block">@webuild</span>
+              <span className="hidden sm:inline-block"></span>
             </Link>
             <Button asChild>
               <Link href="/#book">Book Now</Link>
@@ -216,7 +216,7 @@ export default function Home() {
           </p>
           <div className="flex items-center space-x-4">
             <Link
-              href="https://instagram.com/webuild"
+              href="https://www.instagram.com/mariakh_n/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-pink-500 transition-colors"
