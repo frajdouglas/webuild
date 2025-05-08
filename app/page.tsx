@@ -92,13 +92,13 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <img
+              {/* <img
                 src="/placeholder.svg?height=550&width=550"
                 alt="Self-esteem coaching session"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
                 width={550}
                 height={550}
-              />
+              /> */}
             </div>
           </div>
         </section>
