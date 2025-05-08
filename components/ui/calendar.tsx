@@ -45,8 +45,10 @@ function Calendar({
         cell: "h-9 w-9 text-center text-sm p-0 relative",
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
+          "h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-pink-100 hover:text-pink-600"
         ),
+        day_selected: "text-pink-500 border-2 border-pink-500 font-bold", // Selected day with pink number and border
+        day_today: "text-pink-500", // Pink number for today's date
         day_disabled: "text-muted-foreground opacity-50",
         ...classNames,
       }}
