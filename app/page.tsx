@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  // const [selectedDate, setSelectedDate] = useState();
 
   useEffect(() => {
     const fetchCalendarData = async () => {
