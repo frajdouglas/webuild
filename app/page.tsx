@@ -21,7 +21,6 @@ export default function Home() {
         const data = await getCalendar();
         // Extract the start dates from the response
         const dates = data.map((item: { start: { dateTime: string } }) => new Date(item.start.dateTime));
-        console.log("Available dates:", dates);
         setAvailableDates(dates);
       } catch (error) {
         console.error("Error fetching calendar data:", error);

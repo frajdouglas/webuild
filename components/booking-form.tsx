@@ -37,7 +37,6 @@ export function BookingForm({ availableDates, selectedDate }: BookingFormProps) 
         item.getFullYear() === selectedDate.getFullYear()
       );
     });
-    console.log(selectedDates)
     // Map the selected dates to their time strings in HH:mm format
     return selectedDates.map((date) =>
       date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
@@ -97,9 +96,8 @@ export function BookingForm({ availableDates, selectedDate }: BookingFormProps) 
     }
 
     postEvent(eventData).then((response) => {
-      console.log("Event created successfully:", response);
-      setLoading(false); // Set loading to false after the response
-      setSuccess(true); // Set success to true
+      setLoading(false);
+      setSuccess(true);
       toast({
         title: "Session booked!",
         description: `We've scheduled your session. Please check your confirmation email and RSVP to the meeting.`,
