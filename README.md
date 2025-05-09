@@ -2,7 +2,7 @@
 
 A Next.js application built with Typescript, React and tailwind. Utilises the calendar book api (https://github.com/frajdouglas/calendarBookApi) to allow users to schedule google meet events with the therapist with no friction.
 
-## **Live**
+## **Production Link**
 
 🚀 https://webuild-three.vercel.app/
 
